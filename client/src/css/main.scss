@@ -1,0 +1,12 @@
+@import "welcome-page.scss";
+
+//@import url("url"); used to import something from the remote source (Internet)
+
+body {
+    color: #EEEEEE;
+    background-color: #111111;
+
+    h2 {
+        text-align: center;
+    }
+}

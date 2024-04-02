@@ -1,0 +1,6 @@
+{
+    "presets": [
+        "@babel/preset-env", //Parses ES6 and higher to ES5  [@babel/preset-react > @babel/preset-env > output]
+       ["@babel/preset-react", {"runtime": "automatic"}] //Parses JSX to JavaScript  
+    ]
+}
