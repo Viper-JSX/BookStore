@@ -22,7 +22,7 @@ class BookController {
             const id = req.params.id;
             const { title, author, publishYear } = req.body;
             
-            if (!title || !author || ! publishYear) {
+            if (!title || !author || !publishYear) {
                 return res.status(400).json({ message: "Some fields are missing" });
             }
 
@@ -47,7 +47,7 @@ class BookController {
             
             const updatedBook = await BookModel.findOneAndUpdate({ _id: id }, bookFields);
             
-            if (!updateBook) { //book does not exist
+            if (!updatedBook) { //book does not exist
                 return res.status(403).json(
                     { message: "Book with such ID is not found" }
                 );
@@ -56,8 +56,10 @@ class BookController {
             res.status(200).json({ updatedBook, message: "Book successfully updated" });
             
         } catch (err) {
+            console.log(err);
             res.status(500).json(
-                { message: "Server error", error: err 
+                { 
+                    message: "Server error", error: err 
                 }
             );
         }
@@ -92,7 +94,7 @@ class BookController {
                 publishYear
             };
 
-            const book = BookModel.create(bookFields);
+            const book = await BookModel.create(bookFields);
             
             res.status(201).json({ book, message: "Book successfully created" })
 

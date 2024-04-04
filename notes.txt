@@ -1,4 +1,6 @@
-12:50
+23:00
+
+
 
 <<<=== React ===>>>
 
@@ -8,7 +10,7 @@
 
 
 <<<=== Express====>>>
-<+ res.send() +>
+<+ res.send() +> 
 
 
 
@@ -38,3 +40,81 @@ Description:
 
 
 
+
+
+<+ express.json() or app.use(express.json()) +>
+
+
+<+ +>
+
+
+<<++ CORS ++>>
+
+<+ cors or app.use(cors()) +>
+Syntax: app.use(cors(origin));
+    - origin: is a source (URL), with different domain, which is allowed to make CORS request to the given server (server allows the origin to make request)
+Description: Used to enable CORS requests
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request. In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses fetch() to make a request for https://domain-b.com/data.json.
+
+***
+Shortly saying CORS request is a request from a source1 whose location (URL) differs from the source2's location (URL), i.g they are hosted on different domains (have different origin, so the request is called cross-origin) 
+The Cross-Origin Resource Sharing standard works by adding new HTTP headers that let servers describe which origins are permitted to read that information from a web browser
+
+CORS is a header-based mechanism that allows a server to indicate origins (other that its own) that can make request to it. CORS is an extension of the same-origin policy
+Most Browsers use Same-Origin-Policy, meaning you can make requests to the resourse that is located on the same domain (location) as the resourse that makes the request
+***
+
+<- instalation ->
++++++++++++++++++++++++++++++++++
+npm install cors
++++++++++++++++++++++++++++++++++
+
+<- usage ->
++++++++++++++++++++++++++++++++++++
+app.use(cors());
+
+// or
+
+app.get("/guns", cors(), (req, res) => {}); //enable CORS for the given route
+
+
+// or
+
+var corsOptions = {
+    origin: 'http://example.com',
+}
+
+app.get('/products/:id', cors(corsOptions), function (req, res, next) {})
+
+// or
+
+const allowlist = ['http://example1.com', 'http://example2.com']
+const corsOptionsDelegate = function (req, callback) {
+    let corsOptions;
+    if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+app.get('/products/:id', cors(corsOptionsDelegate), (req, res, next) => {...})
++++++++++++++++++++++++++++++++++++
+
+<+ +>
+
+
+
+<-!-> middleware - ...
+
+
+<+ app.options() +>
+
+<+ +>
+
+<+ app.all() +>
+
+<+ +>

@@ -5,50 +5,23 @@ import ReactDOM from "react-dom";
 import Layout from "./components/Layout.jsx";
 
 import { useDispatch, useSelector } from "react-redux";
-import { authorize, signIn, signUp } from "./redux/thunks/userThunks";
 import axiosClient from "./axios/client.js";
  
 function App(){
-    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     //console.log(user);
 
     useEffect(() => { 
-        try {
-            (async () => {
-                const response = await axiosClient.get("/posts/6536b15d533f4da32d4d7573"); //receiiving post by id
-                const statusCode = response.status;
-                const post = response.data.post;
-                console.log(post, statusCode);
-            })();
-        } catch (err) {
-            console.log("Error occured: ", err.status);
-        }
-        //const token = localStorage.getItem("token");
-
-        //if (token) {
-        //    dispatch(authorize({ token }));
-        //}
-
+        axiosClient.get("books/660eacffeb816f506d775cd2")
+        .then((response) => console.log("Book received", response.data))
+        .catch((err) => console.log("Error occured"));
     }, [])
 
-    const handleSignIn = (values) => {
-        //dispatch(signIn(values));
-        //console.log("Sign-in", values);
-    }
-
-    const handleSignUp = (values) => {
-        //dispatch(signUp(values));
-        //console.log("Sign-up");
-    }
 
     return(
         <div className='App'>
-            <Layout 
-                handleSignIn={handleSignIn}
-                handleSignUp={handleSignUp}
-            />
+            <Layout />
         </div>
     );
 }
