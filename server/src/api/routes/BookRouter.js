@@ -5,6 +5,9 @@ const BookRouter = new Router();
 
 BookRouter
 .get("/", (req, res) => res.json({"p": "2"}))
-.post("/create", BookController.create);
+.get("/", BookController.getAllBooks)
+.get("/:id", BookController.getBook)
+.post("/create", BookController.create)
+.put("/:id/update", BookController.updateBook);
 
 export default BookRouter;
