@@ -1,0 +1,40 @@
+12:50
+
+<<<=== React ===>>>
+
+
+
+
+
+
+<<<=== Express====>>>
+<+ res.send() +>
+
+
+
+
+
+
+<<== Model ==>>
+<+ Model.create(fields) +>
+
+<+ +>
+
+
+
+<+ new Model(fields) +>
+
+<+ +>
+
+
+<+  app.use() +>
+Syntax: app.use(path, func | Router ...)
+    - path: The function or any other utility is called when request is sent to this path
+    - func | Router ...: Any utility which runs as soon as the request is sent to the "path"
+
+Description: 
+
+<+ +>
+
+
+
